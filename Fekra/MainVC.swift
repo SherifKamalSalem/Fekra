@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
-class ViewController: UIViewController {
+enum ThoughtCategory: String {
+    case serious = "Serious"
+    case funny = "Funny"
+    case crazy = "Crazy"
+    case popular = "Popular"
+}
+
+class MainVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
