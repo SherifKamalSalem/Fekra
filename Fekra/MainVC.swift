@@ -21,11 +21,12 @@ class MainVC: UIViewController {
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var segmentControl: UISegmentedControl!
-    //Variables
+    //MARK: Variables
     private var thoughts = [Thought]()
     private var thoughtsCollectionRef: CollectionReference!
     private var thoughtsListener: ListenerRegistration!
     private var selectedCategory = ThoughtCategory.funny.rawValue
+    private var handle: AuthStateDidChangeListenerHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +38,29 @@ class MainVC: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setListener()
+        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
+            if user == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                self.present(loginVC, animated: true, completion: nil)
+            } else {
+                self.setListener()
+            }
+        })
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         guard let thoughtsListener = thoughtsListener else { return }
         thoughtsListener.remove()
+    }
+    
+    @IBAction func logoutBtnPressed(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signoutError {
+            debugPrint("Error signing out: \(signoutError)")
+        }
     }
     
     @IBAction func categoryChanged(_ sender: Any) {
@@ -89,6 +107,16 @@ class MainVC: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toComments" {
+            if let destinationVC = segue.destination as? CommentsVC {
+                if let thought = sender as? Thought {
+                    destinationVC.thought = thought
+                }
+            }
+        }
+    }
 }
 
 extension MainVC: UITableViewDelegate, UITableViewDataSource {
@@ -108,6 +136,10 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toComments", sender: thoughts[indexPath.row])
     }
 }
 

@@ -17,8 +17,11 @@ class ThoughtCell: UITableViewCell {
     @IBOutlet weak var thoughtTxtLbl: UILabel!
     @IBOutlet weak var likesImg: UIImageView!
     @IBOutlet weak var likesNumLbl: UILabel!
+    @IBOutlet weak var commentsNumLbl: UILabel!
+    
     //MARK: Variables
     private var thought: Thought!
+    var isPressLike = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,8 +31,17 @@ class ThoughtCell: UITableViewCell {
     }
 
     @objc func likeTapped() {
-        Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId)
-            .updateData([NUM_LIKES : thought.numLikes + 1])
+        if isPressLike {
+            Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId)
+                .updateData([NUM_LIKES : thought.numLikes - 1])
+            isPressLike = false
+            likesImg.image = UIImage(named: "likeIcon")
+        } else {
+            Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId)
+                .updateData([NUM_LIKES : thought.numLikes + 1])
+            isPressLike = true
+            likesImg.image = UIImage(named: "filledLikeIcon")
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,7 +55,7 @@ class ThoughtCell: UITableViewCell {
         usernameLbl.text = thought.username
         thoughtTxtLbl.text = thought.thoughtTxt
         likesNumLbl.text = String(thought.numLikes)
-        
+        commentsNumLbl.text = String(thought.numComments)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, hh:mm"
         let timestamp = formatter.string(from: thought.timestamp)

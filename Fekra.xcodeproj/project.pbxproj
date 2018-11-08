@@ -19,6 +19,10 @@
 		429E29672193EA140072966F /* ThoughtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E29662193EA140072966F /* ThoughtCell.swift */; };
 		429E2969219413DA0072966F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E2968219413DA0072966F /* LoginVC.swift */; };
 		429E296B219416C00072966F /* CreateUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E296A219416C00072966F /* CreateUserVC.swift */; };
+		42D6D25521942F8D00E1EB34 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D6D25421942F8D00E1EB34 /* CommentsVC.swift */; };
+		42D6D25721943D4900E1EB34 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D6D25621943D4900E1EB34 /* CommentCell.swift */; };
+		42D6D25921943F0400E1EB34 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D6D25821943F0400E1EB34 /* Comment.swift */; };
+		42D6D25B21947B7A00E1EB34 /* KeyboardBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D6D25A21947B7A00E1EB34 /* KeyboardBoundView.swift */; };
 		FAD95D939D8AF07607654BB4 /* Pods_Fekra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9BF693E87566211C7FC581A /* Pods_Fekra.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +41,10 @@
 		429E29662193EA140072966F /* ThoughtCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCell.swift; sourceTree = "<group>"; };
 		429E2968219413DA0072966F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		429E296A219416C00072966F /* CreateUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserVC.swift; sourceTree = "<group>"; };
+		42D6D25421942F8D00E1EB34 /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
+		42D6D25621943D4900E1EB34 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		42D6D25821943F0400E1EB34 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		42D6D25A21947B7A00E1EB34 /* KeyboardBoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardBoundView.swift; sourceTree = "<group>"; };
 		5A2BD6AE9BF9AF0260680C36 /* Pods-Fekra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fekra.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fekra/Pods-Fekra.debug.xcconfig"; sourceTree = "<group>"; };
 		E9A9BF58E7ED2C45CC8358E2 /* Pods-Fekra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fekra.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fekra/Pods-Fekra.release.xcconfig"; sourceTree = "<group>"; };
 		E9BF693E87566211C7FC581A /* Pods_Fekra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fekra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				4282CB122193D3C800A89FAD /* Constants.swift */,
+				42D6D25A21947B7A00E1EB34 /* KeyboardBoundView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -96,6 +105,9 @@
 				429E29662193EA140072966F /* ThoughtCell.swift */,
 				429E2968219413DA0072966F /* LoginVC.swift */,
 				429E296A219416C00072966F /* CreateUserVC.swift */,
+				42D6D25421942F8D00E1EB34 /* CommentsVC.swift */,
+				42D6D25621943D4900E1EB34 /* CommentCell.swift */,
+				42D6D25821943F0400E1EB34 /* Comment.swift */,
 			);
 			path = Fekra;
 			sourceTree = "<group>";
@@ -260,12 +272,16 @@
 			files = (
 				4282CB0E2193C72200A89FAD /* AddThoughtVC.swift in Sources */,
 				429E296B219416C00072966F /* CreateUserVC.swift in Sources */,
+				42D6D25B21947B7A00E1EB34 /* KeyboardBoundView.swift in Sources */,
 				429E29652193E8170072966F /* Thought.swift in Sources */,
 				429E2969219413DA0072966F /* LoginVC.swift in Sources */,
 				428DB47B21936D19009E72B5 /* MainVC.swift in Sources */,
+				42D6D25721943D4900E1EB34 /* CommentCell.swift in Sources */,
 				429E29672193EA140072966F /* ThoughtCell.swift in Sources */,
 				428DB47921936D19009E72B5 /* AppDelegate.swift in Sources */,
 				4282CB132193D3C800A89FAD /* Constants.swift in Sources */,
+				42D6D25921943F0400E1EB34 /* Comment.swift in Sources */,
+				42D6D25521942F8D00E1EB34 /* CommentsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
