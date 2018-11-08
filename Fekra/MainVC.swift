@@ -41,7 +41,7 @@ class MainVC: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        guard let thoughtsListener = thoughtsListener else {return}
+        guard let thoughtsListener = thoughtsListener else { return }
         thoughtsListener.remove()
     }
     
@@ -61,32 +61,34 @@ class MainVC: UIViewController {
     }
     
     func setListener() {
-        thoughtsListener = thoughtsCollectionRef
-            .whereField(CATEGORY, isEqualTo: selectedCategory)
-            .order(by: TIMESTAMP, descending: true)
-            .addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                debugPrint("error fetching Docs \(error)")
-            } else {
-                self.thoughts.removeAll()
-                guard let snapshot = snapshot else { return }
-                for document in snapshot.documents {
-                    let data = document.data()
-                    let username = data[USERNAME] as? String ?? "Anonymous"
-                    let timestamp = data[TIMESTAMP] as? Date ?? Date()
-                    let thoughtTxt = data[THOUGHT_TXT] as? String ?? ""
-                    let numLikes = data[NUM_LIKES] as? Int ?? 0
-                    let numComments = data[NUM_COMMENTS] as? Int ?? 0
-                    let documentId = document.documentID
-                    
-                    let newThought = Thought(username: username, timestamp: timestamp, thoughtTxt: thoughtTxt, numLikes: numLikes, numComments: numComments, documentId: documentId)
-                    self.thoughts.append(newThought)
-                }
-                self.tableView.reloadData()
+        
+        if selectedCategory == ThoughtCategory.popular.rawValue {
+            thoughtsListener = thoughtsCollectionRef
+                .order(by: NUM_LIKES, descending: true)
+                .addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        debugPrint("error fetching Docs \(error)")
+                    } else {
+                        self.thoughts.removeAll()
+                        self.thoughts = Thought.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                    }
+            }
+        } else {
+            thoughtsListener = thoughtsCollectionRef
+                .whereField(CATEGORY, isEqualTo: selectedCategory)
+                .order(by: TIMESTAMP, descending: true)
+                .addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        debugPrint("error fetching Docs \(error)")
+                    } else {
+                        self.thoughts.removeAll()
+                        self.thoughts = Thought.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                    }
             }
         }
     }
-    
 }
 
 extension MainVC: UITableViewDelegate, UITableViewDataSource {
