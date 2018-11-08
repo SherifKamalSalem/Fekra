@@ -75,7 +75,8 @@ class CommentsVC: UIViewController {
             transaction.setData([
                 COMMENT_TXT : commentTxt,
                 TIMESTAMP : FieldValue.serverTimestamp(),
-                USERNAME : self.username
+                USERNAME : self.username,
+                USER_ID : Auth.auth().currentUser?.uid ?? ""
                 ], forDocument: newCommentRef)
             return nil
         }) { (object, error) in
@@ -98,9 +99,15 @@ extension CommentsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell") as? CommentCell {
             
-            cell.configureCell(comment: comments[indexPath.row])
+            cell.configureCell(comment: comments[indexPath.row], delegate: self)
             return cell
         }
         return UITableViewCell()
+    }
+}
+
+extension CommentsVC: CommentDelegate {
+    func commentOptionsTapped(comment: Comment) {
+        
     }
 }

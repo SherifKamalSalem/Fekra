@@ -54,7 +54,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 9, 9:01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB3-34-mxS">
-                                                    <rect key="frame" x="289.5" y="12" width="70.5" height="19.5"/>
+                                                    <rect key="frame" x="152.5" y="12" width="70.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -101,24 +101,27 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is my random thoughts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHc-oQ-yBu">
-                                                    <rect key="frame" x="8" y="35.5" width="359" height="25.5"/>
+                                                    <rect key="frame" x="8" y="39" width="359" height="22"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="0.74538679064417179" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="optionsImageDark" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-3z-Sl9">
+                                                    <rect key="frame" x="337" y="8" width="30" height="30"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6Ef-3d-cWS" firstAttribute="top" secondItem="1Ji-jJ-cir" secondAttribute="top" constant="8" id="1rs-ca-UKd"/>
-                                                <constraint firstItem="UHc-oQ-yBu" firstAttribute="top" secondItem="HB3-34-mxS" secondAttribute="bottom" constant="4" id="6Yv-Oo-5Qr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="HB3-34-mxS" secondAttribute="trailing" id="NHw-zN-feQ"/>
-                                                <constraint firstItem="HB3-34-mxS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Ef-3d-cWS" secondAttribute="trailing" constant="8" symbolic="YES" id="R9R-yV-tAY"/>
+                                                <constraint firstItem="HB3-34-mxS" firstAttribute="centerX" secondItem="1Ji-jJ-cir" secondAttribute="centerX" id="TTW-Mq-dNS"/>
                                                 <constraint firstAttribute="trailing" secondItem="bsQ-HY-xNK" secondAttribute="trailing" constant="8" id="VLt-PN-dMa"/>
-                                                <constraint firstItem="HB3-34-mxS" firstAttribute="centerY" secondItem="6Ef-3d-cWS" secondAttribute="centerY" id="YP4-U8-TTP"/>
                                                 <constraint firstItem="bsQ-HY-xNK" firstAttribute="top" secondItem="UHc-oQ-yBu" secondAttribute="bottom" constant="4" id="Yrd-ml-nEO"/>
                                                 <constraint firstItem="6Ef-3d-cWS" firstAttribute="leading" secondItem="1Ji-jJ-cir" secondAttribute="leading" constant="8" id="ZMS-ew-Uqr"/>
+                                                <constraint firstItem="TNy-3z-Sl9" firstAttribute="top" secondItem="1Ji-jJ-cir" secondAttribute="top" constant="8" id="bfu-4C-e3d"/>
                                                 <constraint firstItem="UHc-oQ-yBu" firstAttribute="leading" secondItem="1Ji-jJ-cir" secondAttribute="leading" constant="8" id="c6g-i7-bAK"/>
                                                 <constraint firstItem="bsQ-HY-xNK" firstAttribute="leading" secondItem="1Ji-jJ-cir" secondAttribute="leading" constant="8" id="cA5-py-PYt"/>
                                                 <constraint firstAttribute="bottom" secondItem="bsQ-HY-xNK" secondAttribute="bottom" constant="5" id="kBP-J4-Zfo"/>
+                                                <constraint firstItem="HB3-34-mxS" firstAttribute="centerY" secondItem="6Ef-3d-cWS" secondAttribute="centerY" id="lNb-xt-g6Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="TNy-3z-Sl9" secondAttribute="trailing" constant="8" id="sZI-xu-lgr"/>
                                                 <constraint firstAttribute="trailing" secondItem="UHc-oQ-yBu" secondAttribute="trailing" constant="8" id="vS8-fR-2Ja"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -126,6 +129,7 @@
                                             <outlet property="commentsNumLbl" destination="rNL-Sc-1MW" id="Kil-F6-fph"/>
                                             <outlet property="likesImg" destination="8sn-9q-zik" id="dRk-UJ-rfN"/>
                                             <outlet property="likesNumLbl" destination="ymh-cC-nhQ" id="uXM-Ek-qFl"/>
+                                            <outlet property="optionsMenu" destination="TNy-3z-Sl9" id="xR6-ma-9Cz"/>
                                             <outlet property="thoughtTxtLbl" destination="UHc-oQ-yBu" id="Qq9-X1-SBP"/>
                                             <outlet property="timestampLbl" destination="HB3-34-mxS" id="Pcs-IB-bkI"/>
                                             <outlet property="usernameLbl" destination="6Ef-3d-cWS" id="c7j-Sh-n1t"/>
@@ -423,37 +427,44 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 9, 9:01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLr-IT-gEw">
-                                                    <rect key="frame" x="281.5" y="15" width="70.5" height="19.5"/>
+                                                    <rect key="frame" x="152.5" y="16.5" width="70.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sherif" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Du-Mb-I7J">
-                                                    <rect key="frame" x="15" y="11" width="54" height="27.5"/>
+                                                    <rect key="frame" x="15" y="11" width="54" height="30"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="this is my random thoughts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKM-Ve-JW9">
-                                                    <rect key="frame" x="15" y="46.5" width="345" height="45.5"/>
+                                                    <rect key="frame" x="15" y="49" width="345" height="43"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="0.74538679060000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="optionsImageDark" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-Nr-ELI">
+                                                    <rect key="frame" x="330" y="11" width="30" height="30"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="TLr-IT-gEw" firstAttribute="centerY" secondItem="1Du-Mb-I7J" secondAttribute="centerY" id="5CC-jA-DyU"/>
                                                 <constraint firstItem="FKM-Ve-JW9" firstAttribute="top" secondItem="1Du-Mb-I7J" secondAttribute="bottom" constant="8" id="Has-ez-JiM"/>
                                                 <constraint firstAttribute="trailing" secondItem="FKM-Ve-JW9" secondAttribute="trailing" constant="15" id="KlH-ff-vCF"/>
+                                                <constraint firstItem="TLr-IT-gEw" firstAttribute="centerX" secondItem="MG5-kz-Dtm" secondAttribute="centerX" id="XUD-5m-Bc6"/>
+                                                <constraint firstItem="mh5-Nr-ELI" firstAttribute="centerY" secondItem="TLr-IT-gEw" secondAttribute="centerY" id="Ypx-cy-QVg"/>
+                                                <constraint firstItem="mh5-Nr-ELI" firstAttribute="trailing" secondItem="MG5-kz-Dtm" secondAttribute="trailingMargin" id="Ze9-bG-iZ5"/>
                                                 <constraint firstAttribute="bottom" secondItem="FKM-Ve-JW9" secondAttribute="bottom" constant="8" id="aye-LC-qrb"/>
-                                                <constraint firstItem="TLr-IT-gEw" firstAttribute="centerY" secondItem="1Du-Mb-I7J" secondAttribute="centerY" id="ezr-6u-AIy"/>
+                                                <constraint firstItem="mh5-Nr-ELI" firstAttribute="top" secondItem="MG5-kz-Dtm" secondAttribute="topMargin" id="bhr-zv-btH"/>
                                                 <constraint firstItem="1Du-Mb-I7J" firstAttribute="top" secondItem="MG5-kz-Dtm" secondAttribute="topMargin" id="fYS-uA-Vht"/>
                                                 <constraint firstItem="1Du-Mb-I7J" firstAttribute="leading" secondItem="MG5-kz-Dtm" secondAttribute="leadingMargin" id="fch-QS-TzA"/>
                                                 <constraint firstItem="FKM-Ve-JW9" firstAttribute="leading" secondItem="MG5-kz-Dtm" secondAttribute="leading" constant="15" id="gfb-QV-4B1"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="TLr-IT-gEw" secondAttribute="trailing" constant="8" id="yQe-Lq-I8b"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentTxtLbl" destination="FKM-Ve-JW9" id="Hih-vS-uVQ"/>
+                                            <outlet property="optionsMenu" destination="mh5-Nr-ELI" id="xZy-Rz-hZh"/>
                                             <outlet property="timestampLbl" destination="TLr-IT-gEw" id="VYg-i4-mHN"/>
                                             <outlet property="usernameLbl" destination="1Du-Mb-I7J" id="uSw-Oz-Bfg"/>
                                         </connections>
@@ -545,6 +556,7 @@
         <image name="addThoughtIcon" width="21" height="24"/>
         <image name="filledCommentIcon" width="37.5" height="37.5"/>
         <image name="likeIcon" width="37.5" height="37.5"/>
+        <image name="optionsImageDark" width="30" height="30"/>
         <image name="sendIcon" width="37.5" height="37.5"/>
     </resources>
 </document>

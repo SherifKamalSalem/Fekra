@@ -20,6 +20,7 @@ let TIMESTAMP = "timestamp"
 let USERNAME = "username"
 let DATE_CREATED = "dateCreated"
 let COMMENT_TXT = "commentTxt"
+let USER_ID = "userId"
 
 
 
