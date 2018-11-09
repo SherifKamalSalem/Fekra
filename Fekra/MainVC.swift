@@ -32,7 +32,7 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 80
+        tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableView.automaticDimension
         thoughtsCollectionRef = Firestore.firestore().collection(THOUGHTS_REF)
     }
@@ -115,6 +115,38 @@ class MainVC: UIViewController {
                     destinationVC.thought = thought
                 }
             }
+        } else if segue.identifier == "toEditThought" {
+            guard let destination = segue.destination as? AddThoughtVC else { return }
+            if let thoughtData = sender as? Thought {
+                destination.thoughtData = thoughtData
+            }
+        }
+    }
+    
+    func delete(collection: CollectionReference, batchSize: Int = 100, completion: @escaping (Error?) -> ()) {
+        // Limit query to avoid out-of-memory errors on large collections.
+        // When deleting a collection guaranteed to fit in memory, batching can be avoided entirely.
+        collection.limit(to: batchSize).getDocuments { (docset, error) in
+            // An error occurred.
+            guard let docset = docset else {
+                completion(error)
+                return
+            }
+            guard docset.count > 0 else {
+                completion(nil)
+                return
+            }
+            
+            let batch = collection.firestore.batch()
+            docset.documents.forEach { batch.deleteDocument($0.reference) }
+            
+            batch.commit { (batchError) in
+                if let batchError = batchError {
+                    completion(batchError)
+                } else {
+                    self.delete(collection: collection, batchSize: batchSize, completion: completion)
+                }
+            }
         }
     }
 }
@@ -145,6 +177,35 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 
 extension MainVC : ThoughtDelegate {
     func thoughtOptionsTapped(thought: Thought) {
+        let alert = UIAlertController(title: "Delete", message: "Do you want to delete your thought?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete Thought", style: .default) { (action) in
+            self.delete(collection: Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId).collection(COMMENTS_REF), completion: { (error) in
+                if let error = error {
+                    debugPrint("Couldn't delete your subcollection: \(error.localizedDescription)")
+                } else {
+                    Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId)
+                        .delete(completion: { (error) in
+                            if let error = error {
+                                debugPrint("Couldn't delete your thought: \(error.localizedDescription)")
+                            } else {
+                                
+                                alert.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                }
+            })
+        }
+        
+        let editAction = UIAlertAction(title: "Edit Thought", style: .default) { (action) in
+            self.performSegue(withIdentifier: "toEditThought", sender: thought)
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(editAction)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
         
     }
 }

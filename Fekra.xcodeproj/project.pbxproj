@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42497B6C219525AE00808B1C /* UpdateCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42497B6B219525AE00808B1C /* UpdateCommentVC.swift */; };
 		4282CB0E2193C72200A89FAD /* AddThoughtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282CB0D2193C72200A89FAD /* AddThoughtVC.swift */; };
 		4282CB132193D3C800A89FAD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4282CB122193D3C800A89FAD /* Constants.swift */; };
 		428DB47921936D19009E72B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DB47821936D19009E72B5 /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42497B6B219525AE00808B1C /* UpdateCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCommentVC.swift; sourceTree = "<group>"; };
 		4282CB0D2193C72200A89FAD /* AddThoughtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThoughtVC.swift; sourceTree = "<group>"; };
 		4282CB122193D3C800A89FAD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		428DB47521936D19009E72B5 /* Fekra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fekra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				42D6D25421942F8D00E1EB34 /* CommentsVC.swift */,
 				42D6D25621943D4900E1EB34 /* CommentCell.swift */,
 				42D6D25821943F0400E1EB34 /* Comment.swift */,
+				42497B6B219525AE00808B1C /* UpdateCommentVC.swift */,
 			);
 			path = Fekra;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				429E296B219416C00072966F /* CreateUserVC.swift in Sources */,
 				42D6D25B21947B7A00E1EB34 /* KeyboardBoundView.swift in Sources */,
 				429E29652193E8170072966F /* Thought.swift in Sources */,
+				42497B6C219525AE00808B1C /* UpdateCommentVC.swift in Sources */,
 				429E2969219413DA0072966F /* LoginVC.swift in Sources */,
 				428DB47B21936D19009E72B5 /* MainVC.swift in Sources */,
 				42D6D25721943D4900E1EB34 /* CommentCell.swift in Sources */,

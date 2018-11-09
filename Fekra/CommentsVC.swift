@@ -64,14 +64,18 @@ class CommentsVC: UIViewController {
         firestore.runTransaction({ (transaction, errorPointer) -> Any? in
             let thoughtDoc: DocumentSnapshot
             do {
-                try thoughtDoc = transaction.getDocument(self.firestore.collection(THOUGHTS_REF).document(self.thought.documentId))
+                try thoughtDoc = transaction.getDocument(self.firestore
+                    .collection(THOUGHTS_REF)
+                    .document(self.thought.documentId))
             } catch let error as NSError {
                 debugPrint("Fetch error: \(error.localizedDescription)")
                 return nil
             }
             guard let oldNumComments = thoughtDoc.data()?[NUM_COMMENTS] as? Int else { return nil }
             transaction.updateData([NUM_COMMENTS : oldNumComments + 1], forDocument: self.thoughtRef)
-            let newCommentRef = self.firestore.collection(THOUGHTS_REF).document(self.thought.documentId).collection(COMMENTS_REF).document()
+            let newCommentRef = self.firestore.collection(THOUGHTS_REF)
+                .document(self.thought.documentId)
+                .collection(COMMENTS_REF).document()
             transaction.setData([
                 COMMENT_TXT : commentTxt,
                 TIMESTAMP : FieldValue.serverTimestamp(),
@@ -86,6 +90,13 @@ class CommentsVC: UIViewController {
                 self.addCommentTxt.text = ""
                 self.addCommentTxt.resignFirstResponder()
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? UpdateCommentVC else { return }
+        if let commentData = sender as? (comment: Comment, thought: Thought) {
+            destination.commentData = commentData
         }
     }
 }
@@ -108,6 +119,47 @@ extension CommentsVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CommentsVC: CommentDelegate {
     func commentOptionsTapped(comment: Comment) {
+        let alert = UIAlertController(title: "Edit Comment", message: "You can delete or edit", preferredStyle: .actionSheet)
         
+        let deleteAction = UIAlertAction(title: "Delete Comment", style: .default) { (action) in
+            self.firestore.runTransaction({ (transaction, errorPointer) -> Any? in
+                let thoughtDoc: DocumentSnapshot
+                do {
+                    try thoughtDoc = transaction.getDocument(self.firestore
+                        .collection(THOUGHTS_REF)
+                        .document(self.thought.documentId))
+                } catch let error as NSError {
+                    debugPrint("Fetch error: \(error.localizedDescription)")
+                    return nil
+                }
+                guard let oldNumComments = thoughtDoc.data()?[NUM_COMMENTS] as? Int else { return nil }
+                transaction.updateData([NUM_COMMENTS : oldNumComments - 1], forDocument: self.thoughtRef)
+                let commentRef = self.firestore.collection(THOUGHTS_REF).document(self.thought.documentId)
+                    .collection(COMMENTS_REF).document(comment.documentId)
+                transaction.deleteDocument(commentRef)
+                return nil
+            }) { (object, error) in
+                if let error = error {
+                    debugPrint("Transaction Failed: \(error)")
+                } else {
+                    alert.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+        
+        let editAction = UIAlertAction(title: "Edit Action", style: .default) { (action) in
+            self.performSegue(withIdentifier: "toEditComment", sender: (comment, self.thought))
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(editAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }

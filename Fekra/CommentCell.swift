@@ -24,7 +24,7 @@ class CommentCell: UITableViewCell {
     private var comment: Comment!
     private var delegate: CommentDelegate?
     
-    func configureCell(comment: Comment, delegate: CommentDelegate) {
+    func configureCell(comment: Comment, delegate: CommentDelegate?) {
         usernameLbl.text = comment.username
         commentTxtLbl.text = comment.commentTxt
         self.comment = comment
@@ -37,6 +37,7 @@ class CommentCell: UITableViewCell {
         
         if comment.userId == Auth.auth().currentUser?.uid {
             optionsMenu.isHidden = false
+            optionsMenu.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(commentOptionsTapped))
             optionsMenu.addGestureRecognizer(tap)
         }
