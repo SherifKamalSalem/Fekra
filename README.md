@@ -10,16 +10,18 @@ A real time social network app for sharing func things using the new google back
 # Screenshots
 
 ## Home
+
 | ![Home](https://github.com/SherifKamalSalem/Fekra/blob/master/home.png) 
-|:---:|:---:|
 
 
 ##  Add Fekra
 
-| ![Delete Post](https://github.com/SherifKamalSalem/Fekra/blob/master/alert.png) 
-|:---:|:---:|
 
-## Delete Fekra
+| ![Delete Post](https://github.com/SherifKamalSalem/Fekra/blob/master/alert.png) 
+
+
+
+## update Fekra
+
 
 | ![Delete Post](https://github.com/SherifKamalSalem/Fekra/blob/master/post.png)
-|:---:|:---:|
